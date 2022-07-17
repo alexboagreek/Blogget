@@ -7,16 +7,15 @@ import style from './Header.module.css';
 
 export const Header = () => {
   return (
-    <header className={style.header}>
+    <Header className={style.header}>
       <Layout>
           <div className={style.gridContainer}>
             <Logo/>
             <Heading/>
             <Search/>
           <Auth auth={false}/>
-          </div>
+        </div>
       </Layout>
-    </header>
-
+    </Header>
   )
 }
