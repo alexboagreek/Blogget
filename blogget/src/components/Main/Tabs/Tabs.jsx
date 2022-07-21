@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {useState, useEffect} from 'react';
 import {assignId} from '../../../utils/generateRandomId';
 import {debounceRaf} from '../../../utils/debounce';
+import {Text} from '../../../UI/Text';
 
 import {ReactComponent as ArrowIcon} from './img/arrow.svg';
 import {ReactComponent as MainIcon} from './img/main.svg';
@@ -52,7 +53,7 @@ export const Tabs = () => {
       {(isDropdownOpen || !isDropdown) && (
         <ul className={style.list} onClick={() => setIsDropdownOpen(false)}>
           {LIST.map(({value, id, Icon}) => (
-            <li className={style.item} key={id}>
+            <Text As='li' className={style.item} fontWeight='medium' key={id}>
               <button
                 className={style.btn}
                 onClick={() => {
@@ -61,7 +62,7 @@ export const Tabs = () => {
                 {value}
                 {Icon && <Icon width={30} height={30}/>}
               </button>
-            </li>
+            </Text>
           ))}
         </ul>
       )}

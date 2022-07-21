@@ -45,6 +45,7 @@
   
   .item {
     border-bottom: 1px solid var(--greyE6);
+    font-weight: 900;
   }
   
   .item:last-child {
