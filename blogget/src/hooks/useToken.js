@@ -1,7 +1,12 @@
 import {useState, useEffect} from 'react';
+import {API_URL} from '../api/const';
 
 export const useToken = (state) => {
   const [token, setToken] = useState(state);
+  const delToken = () => {
+    localStorage.removeItem('bearer');
+    location = API_URL;
+  };
 
   useEffect(() => {
     if (location.pathname.includes('/auth')) {
@@ -21,6 +26,6 @@ export const useToken = (state) => {
     }
   }, [token]);
 
-  return [token];
+  return [token, delToken];
 };
 

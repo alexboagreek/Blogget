@@ -7,9 +7,9 @@ import {Text} from '../../../UI/Text';
 import {URL_API} from '../../../api/const';
 
 
-export const Auth = ({token}) => {
+export const Auth = ({token, delToken}) => {
   const [auth, setAuth] = useState({});
-
+  let [showButton, setShowButton] = useState(style.hidden);
 
   useEffect(() => {
     if (!token) return;
@@ -25,7 +25,8 @@ export const Auth = ({token}) => {
         setAuth({name, img});
       })
       .catch(error => {
-        console.log(error);
+        console.error(error);
+        delToken();
         setAuth({});
       });
   }, [token]);
@@ -33,14 +34,29 @@ export const Auth = ({token}) => {
   return (
     <div className={style.container}>
       {auth.name ? (
-        <button className={style.btn}>
-          <img className={style.img}
-            src={auth.img}
-            title={auth.name}
-            alt={`Аватар ${auth.name}`}
-          />
-          <Text>{auth.name}</Text>
-        </button>
+        <>
+          <button className={style.btn}>
+            <img className={style.img}
+              src={auth.img}
+              title={auth.name}
+              alt={`Аватар ${auth.name}`}
+              onClick={() => {
+                if (showButton === style.hidden) {
+                  setShowButton(showButton === style.logout);
+                } else if (showButton === style.logout) {
+                  setShowButton(showButton = style.hidden);
+                }
+              }}
+            />
+            <Text>{auth.name}</Text>
+          </button>
+          <button
+            className={showButton}
+            onClick={() => {
+              delToken();
+            }
+            }>Выйти</button>
+        </>
       ) : (
         <Text className={style.authLink} As='a' href={urlAuth}>
           <LoginIcon className={style.svg}/>
@@ -52,6 +68,7 @@ export const Auth = ({token}) => {
 
 Auth.propTypes = {
   token: PropTypes.string,
+  delToken: PropTypes.func,
 };
 
 
