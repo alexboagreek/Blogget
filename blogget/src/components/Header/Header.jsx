@@ -4,22 +4,22 @@ import Search from './Search';
 import Auth from './Auth';
 import Heading from './Heading';
 import style from './Header.module.css';
-import PropTypes from 'prop-types';
+import {tokenContext} from '../../context/tokenContext.js';
 
-export const Header = ({token, delToken}) => (
-  <header className={style.header}>
-    <Layout>
-      <div className={style.gridContainer}>
-        <Logo/>
-        <Heading/>
-        <Search/>
-        <Auth token={token} delToken={delToken}/>
-      </div>
-    </Layout>
-  </header>
-);
-
-Header.propTypes = {
-  token: PropTypes.string,
-  delToken: PropTypes.func,
+export const Header = () => {
+  const {Consumer} = tokenContext;
+  return (
+    <header className={style.header}>
+      <Layout>
+        <div className={style.gridContainer}>
+          <Logo/>
+          <Heading/>
+          <Search/>
+          <Consumer>
+            {(ctx) => <Auth {...ctx}/>}
+          </Consumer>
+        </div>
+      </Layout>
+    </header>
+  );
 };

@@ -18,11 +18,10 @@ export const useAuth = (token) => {
         setAuth({name, img});
       })
       .catch(error => {
-        console.error(error);
-        delToken();
+        // console.error(error);
         setAuth({});
       });
   }, [token]);
-
-  return [auth];
+  const clearAuth = () => setAuth({});
+  return [auth, clearAuth];
 };
