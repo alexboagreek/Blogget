@@ -38,6 +38,7 @@ Text.propTypes = {
   className: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.string,
+    PropTypes.number,
     PropTypes.object,
     PropTypes.array,
   ]),
