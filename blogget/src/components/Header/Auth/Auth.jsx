@@ -33,6 +33,7 @@ export const Auth = ({token, delToken}) => {
             className={showButton}
             onClick={() => {
               delToken();
+              clearAuth();
             }
             }>Выйти</button>
         </>
