@@ -1,13 +1,15 @@
 import style from './Auth.module.css';
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import {ReactComponent as LoginIcon} from './img/login.svg';
 import PropTypes from 'prop-types';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text';
-import {useAuth} from '../../../hooks/useAuth';
+import {tokenContext} from './../../../context/tokenContext';
+import {authContext} from './../../../context/authContext';
 
-export const Auth = ({token, delToken}) => {
-  const [auth, clearAuth] = useAuth(token);
+export const Auth = () => {
+  const {delToken} = useContext(tokenContext);
+  const {auth, clearAuth} = useContext(authContext);
   let [showButton, setShowButton] = useState(style.hidden);
 
   return (
