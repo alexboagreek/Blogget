@@ -1,50 +1,66 @@
+import {PostsContextProvider} from '../../../context/postsContext';
+import {usePosts} from '../../../hooks/usePosts';
 import style from './List.module.css';
-import Post from './Post';
-// import {postData} from './../../../data';
+import stylePost from './Post/Post.module.css';
+import stylePostImage from './Post/PostImage/PostImage.module.css';
+import stylePostContent from './Post/PostContent/PostContent.module.css';
+import notphoto from './Post/img/notphoto.jpg';
+import {Text} from '../../../UI/Text';
+import {PostDeleteButton} from './Post/PostDeleteButton/PostDeleteButton';
+import {PostTime} from './Post/PostTime/PostTime';
 
 
 export const List = () => {
-  const postsData = [
-    {
-      thumbnail: '',
-      title: 'Title',
-      author: 'Nickname',
-      ups: 24,
-      date: '2022-02-28T09:45:00.00Z',
-      id: '1',
-    },
-    {
-      thumbnail: '',
-      title: 'Title1',
-      author: 'Nickname1',
-      ups: 77,
-      date: '2022-02-01T06:45:00.00Z',
-      id: '2',
-    },
-    {
-      thumbnail: '',
-      title: 'Title2',
-      author: 'Nickname2',
-      ups: 28,
-      date: '2022-02-24T04:45:00.00Z',
-      id: '3',
-    },
-    {
-      thumbnail: '',
-      title: 'Title3',
-      author: 'Nickname3',
-      ups: 47,
-      date: '2022-02-20T10:45:00.00Z',
-      id: '4',
-    },
-  ];
+  const postsData = usePosts();
 
   return (
-    <ul className={style.list}>
-      {postsData.map((postData) => (
-        <Post key={postData.id} postData={postData} />
-      ))}
-    </ul>
+    <PostsContextProvider>
+      <ul className={style.list}>
+        {
+          postsData.map((posts) => (
+            <li className={stylePost.post} key={posts.data.id}>
+              <img className=
+                {stylePostImage.img}
+              src={notphoto}
+              alt={posts.data.title} />
+              <div className={stylePostContent.content}>
+                <Text As='h2' className={stylePostContent.title}>
+                  <Text As='a' size={18} tsize={24}
+                    className={stylePostContent.linkPost} href='#post'>
+                    {posts.data.title}
+                  </Text>
+                </Text>
+                <Text As='a'
+                  size={12}
+                  tsize={14}
+                  color='orange'
+                  className={stylePostContent.linkAuthor}
+                  href='#author'>
+                  {posts.data.author}
+                </Text>
+              </div>
+              <Text As='div' className={stylePostContent.rating}>
+                <Text As='button'
+                  className={stylePostContent.up}
+                  aria-label='Повысить рейтинг' />
+                <Text
+                  As='p'
+                  color='grey99'
+                  fontWeight='medium'
+                  size={12}
+                  className={stylePostContent.ups}>
+                  {posts.data.ups}
+                </Text>
+                <Text As='button'
+                  className={stylePostContent.down}
+                  aria-label='Понизить рейтинг' />
+              </Text>
+              <PostTime/>
+              <PostDeleteButton/>
+            </li>
+          ))}
+      </ul>
+    </PostsContextProvider>
   );
 };
 
