@@ -4,12 +4,12 @@ import Post from './Post';
 
 
 export const List = () => {
-  const postsData = usePosts();
+  const postData = usePosts();
 
   return (
     <ul className={style.list}>
       {
-        postsData.map((item) => (
+        postData.map((item) => (
           <Post key={item.data.id} postData={item.data}/>
         ))
       }
