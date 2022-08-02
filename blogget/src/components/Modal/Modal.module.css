@@ -1,0 +1,37 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .modal {
+    position: absolute;
+    left: 50%;
+    background-color: var(--white);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px 15px;
+    inset: 5%;
+    border-radius: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .title {
+    margin-bottom: 30px;
+    padding-right: 50px;
+  }
+  
+  .author {
+    margin-bottom: 20px;
+  }
+  
+  .content p {
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+  
+  .content p:last-child {
+    margin-bottom: 0;
+  }
+  

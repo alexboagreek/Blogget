@@ -4,7 +4,6 @@ import {postData} from '../../../../../data';
 
 export const PostTime = () => {
   const {date} = postData;
-  console.log(style);
 
   return (
     <time

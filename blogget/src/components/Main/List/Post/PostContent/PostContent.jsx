@@ -1,11 +1,12 @@
 import style from './PostContent.module.css';
-import {postData} from '../../../../../data';
+import PropTypes from 'prop-types';
 import {Text} from '../../../../../UI/Text';
+import {useState} from 'react';
+import {Modal} from '../../../../Modal/Modal';
 
 
-export const PostContent = () => {
-  const {title, author} = postData;
-  console.log(style);
+export const PostContent = ({title, author, markdown, id}) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className={style.content}>
@@ -14,7 +15,10 @@ export const PostContent = () => {
           size={18}
           tsize={24}
           className={style.linkPost}
-          href='#post'>
+          href='#post'
+          onClick={() => {
+            setIsModalOpen(true);
+          }}>
           {title}
         </Text>
       </Text>
@@ -26,6 +30,24 @@ export const PostContent = () => {
         href='#author'>
         {author}
       </Text>
+      {isModalOpen && (
+        <Modal
+          title={title}
+          author={author}
+          markdown={markdown}
+          closeModal={() => {
+            setIsModalOpen(false);
+          }}
+          id={id}
+        />
+      )}
     </div>
   );
+};
+
+PostContent.propTypes = {
+  title: PropTypes.string,
+  author: PropTypes.string,
+  markdown: PropTypes.string,
+  id: PropTypes.string,
 };
