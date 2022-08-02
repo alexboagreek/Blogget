@@ -1,14 +1,15 @@
 import style from './PostTime.module.css';
+import PropTypes from 'prop-types';
 import formatDate from '../../../../../utils/formatDate';
-import {postData} from '../../../../../data';
 
-export const PostTime = () => {
-  const {date} = postData;
+export const PostTime = ({created}) => (
+  <time
+    className={style.date}
+    dateTime={created}>
+    {formatDate(created)}
+  </time>
+);
 
-  return (
-    <time
-      className={style.date}
-      dateTime={date}>{formatDate(date)}
-    </time>
-  );
+PostTime.propTypes = {
+  created: PropTypes.number,
 };

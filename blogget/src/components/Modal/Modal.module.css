@@ -35,3 +35,62 @@
     margin-bottom: 0;
   }
   
+  .content a {
+    color: var(--orange);
+  }
+  
+  .close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: transparent;
+    border: none;
+    width: 15px;
+    height: 15px;
+  }
+  
+  .preload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+    font-weight: 100;
+    background-color:#ffffffe5;
+    z-index: 2000;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  @media (min-width: 768px) {
+    .modal {
+      padding: 30px;
+      inset: 10%;
+    }
+  
+    .modal h2 {
+      font-size: 24px;
+    }
+  
+    .modal p {
+      font-size: 16px;
+    }
+  
+    .author {
+      margin-bottom: 30px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .modal {
+      padding: 50px;
+      inset: 15%;
+    }
+  }
+  

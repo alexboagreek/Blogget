@@ -12,8 +12,8 @@ export const PostContent = ({title, author, markdown, id}) => {
     <div className={style.content}>
       <Text As='h2' className={style.title}>
         <Text As='a'
-          size={18}
-          tsize={24}
+          size={14}
+          tsize={22}
           className={style.linkPost}
           href='#post'
           onClick={() => {

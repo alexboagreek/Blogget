@@ -1,11 +1,8 @@
 import style from './PostRaiting.module.css';
-import {postData} from './../../../../../data';
+import PropTypes from 'prop-types';
 import {Text} from '../../../../../UI/Text';
 
-export const PostRaiting = () => {
-  const {ups} = postData;
-  console.log(style);
-
+export const PostRaiting = ({ups}) => {
   return (
     <Text As='div' className={style.rating}>
       <Text As='button' className={style.up} aria-label='Повысить рейтинг' />
@@ -13,9 +10,14 @@ export const PostRaiting = () => {
         color='grey99'
         fontWeight='medium'
         size={12}
-        className={style.ups}>{ups}
+        className={style.ups}>
+        {ups}
       </Text>
       <Text As='button' className={style.down} aria-label='Понизить рейтинг' />
     </Text>
   );
+};
+
+PostRaiting.propTypes = {
+  ups: PropTypes.number,
 };
