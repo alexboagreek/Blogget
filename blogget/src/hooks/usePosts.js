@@ -1,10 +1,11 @@
-import {useContext, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {URL_API} from '../api/const';
-import {tokenContext} from '../context/tokenContext';
+import {getToken} from '../api/token';
 
 export const usePosts = () => {
-  const {token} = useContext(tokenContext);
   const [posts, setPosts] = useState([]);
+
+  const token = getToken();
 
   useEffect(() => {
     if (!token) return;

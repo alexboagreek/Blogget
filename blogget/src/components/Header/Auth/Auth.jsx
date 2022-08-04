@@ -1,16 +1,24 @@
 import style from './Auth.module.css';
+import {API_URL} from '../../../api/const';
 import {useState, useContext} from 'react';
 import {ReactComponent as LoginIcon} from './img/login.svg';
-import PropTypes from 'prop-types';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text';
-import {tokenContext} from './../../../context/tokenContext';
 import {authContext} from './../../../context/authContext';
 
+import {useDispatch} from 'react-redux';
+import {deleteToken} from '../../../store';
+
 export const Auth = () => {
-  const {delToken} = useContext(tokenContext);
-  const {auth, clearAuth} = useContext(authContext);
   let [showButton, setShowButton] = useState(style.hidden);
+  const dispatch = useDispatch();
+  const {auth, clearAuth} = useContext(authContext);
+
+  const handleDelToken = () => {
+    dispatch(deleteToken());
+    location = API_URL;
+  };
+
 
   return (
     <div className={style.container}>
@@ -34,7 +42,7 @@ export const Auth = () => {
           <button
             className={showButton}
             onClick={() => {
-              delToken();
+              handleDelToken();
               clearAuth();
             }
             }>Выйти</button>
@@ -48,9 +56,9 @@ export const Auth = () => {
   );
 };
 
-Auth.propTypes = {
-  token: PropTypes.string,
-  delToken: PropTypes.func,
-};
+// Auth.propTypes = {
+//   token: PropTypes.string,
+//   delToken: PropTypes.func,
+// };
 
 
