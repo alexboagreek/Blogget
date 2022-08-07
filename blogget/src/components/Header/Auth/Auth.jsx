@@ -1,52 +1,55 @@
 import style from './Auth.module.css';
 import {API_URL} from '../../../api/const';
-import {useState, useContext} from 'react';
+import PropTypes from 'prop-types';
+import {useState} from 'react';
 import {ReactComponent as LoginIcon} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text';
-import {authContext} from './../../../context/authContext';
-
+import {useAuth} from '../../../hooks/useAuth';
 import {useDispatch} from 'react-redux';
-import {deleteToken} from '../../../store';
+import {deleteToken} from '../../../store/tokenReducer';
+import {AuthLoader} from '../../../UI/AuthLoader/AuthLoader';
 
 export const Auth = () => {
-  let [showButton, setShowButton] = useState(style.hidden);
+  const [showLogout, setShowLogout] = useState(style.hidden);
+  const [auth, loading, clearAuth] = useAuth();
   const dispatch = useDispatch();
-  const {auth, clearAuth} = useContext(authContext);
 
-  const handleDelToken = () => {
+  const getOut = () => {
+    setShowLogout(!showLogout);
+  };
+
+  const logOut = () => {
     dispatch(deleteToken());
     location = API_URL;
+    clearAuth();
   };
 
 
   return (
     <div className={style.container}>
-      {auth.name ? (
+
+      {loading ? (
+        <AuthLoader/>
+      ) : auth.name ? (
         <>
-          <button className={style.btn}>
-            <img className={style.img}
+          <button className={style.btn} onClick={getOut}>
+            <img
+              className={style.img}
               src={auth.img}
               title={auth.name}
               alt={`Аватар ${auth.name}`}
-              onClick={() => {
-                if (showButton === style.hidden) {
-                  setShowButton(showButton === style.logout);
-                } else if (showButton === style.logout) {
-                  setShowButton(showButton = style.hidden);
-                }
-              }}
             />
             <Text>{auth.name}</Text>
           </button>
-          <button
-            className={showButton}
-            onClick={() => {
-              handleDelToken();
-              clearAuth();
-            }
-            }>Выйти</button>
+          {showLogout && (
+            <button
+              className={style.logout}
+              onClick={logOut}
+            >Выйти</button>
+          )}
         </>
+
       ) : (
         <Text className={style.authLink} As='a' href={urlAuth}>
           <LoginIcon className={style.svg}/>
@@ -56,9 +59,9 @@ export const Auth = () => {
   );
 };
 
-// Auth.propTypes = {
-//   token: PropTypes.string,
-//   delToken: PropTypes.func,
-// };
+Auth.propTypes = {
+  token: PropTypes.string,
+  deleteToken: PropTypes.func,
+};
 
 
