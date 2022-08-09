@@ -13,7 +13,7 @@ export const Comments = ({comments}) => {
   const liElementCreated = () => {
     const elementArray = [];
     if (comments !== undefined) {
-      comments.map((elem) => (
+      comments.map((elem) => elem.body && (
         elementArray.push(
           <li className={style.item} key={elem.id}>
             <h3

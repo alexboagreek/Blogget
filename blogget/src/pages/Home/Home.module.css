@@ -1,0 +1,19 @@
+.home {
+    display: flex;
+    justify-content: center;
+    /* background-color: aquamarine; */
+  }
+  .home__container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .home__container p {
+    font-size: 19px;
+    font-weight: 400;
+  }
+  
