@@ -14,8 +14,8 @@ export const Main = () => {
       <Layout>
         <Tabs/>
         <Routes>
-          <Route path='/' element={Home}/>
-          <Route path='*' element={NotFound}/>
+          <Route path='/' element={<Home/>}/>
+          <Route path='*' element={<NotFound/>}/>
           <Route path='/category/:page' element={<List/>}>
             <Route path='post/:id' element={<Modal/>} />
           </Route>

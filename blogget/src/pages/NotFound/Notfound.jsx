@@ -1,5 +1,5 @@
 import style from './Notfound.module.css';
-import ImgError from './img/404.svg';
+import ImgError from './img/404.png';
 
 export const NotFound = () => {
   console.log(style);
