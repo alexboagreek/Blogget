@@ -1,26 +1,14 @@
-import {useEffect, useState} from 'react';
-import {URL_API} from '../api/const';
-import {getToken} from '../api/token';
+import {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {postsDataAsync} from '../store/postsData/postsDataAction';
 
-export const usePosts = () => {
-  const [posts, setPosts] = useState([]);
-
-  const token = getToken();
+export const usePosts = (newPage) => {
+  const token = useSelector(state => state.tokenReducer.token);
+  const posts = useSelector(state => state.postsReducer.data);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!token) return;
-    fetch(`${URL_API}/best?limit=8`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-      },
-    })
-      .then(response => response.json())
-      .then(response => {
-        setPosts(response.data.children);
-      })
-      .catch(error => {
-        console.error('нет данных', error);
-      });
+    dispatch(postsDataAsync(newPage));
   }, [token]);
 
   return posts;
