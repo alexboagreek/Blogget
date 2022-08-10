@@ -15,12 +15,12 @@ export const Modal = () => {
   const {id, page} = useParams();
   const navigate = useNavigate();
   const overlayRef = useRef(null);
-  const [commentsData, loading] = useCommentsData(id);
+  const [post, comments, loading] = useCommentsData(id);
 
-  const [
-    post,
-    comments,
-  ] = commentsData;
+  // const [
+  //   post,
+  //   comments,
+  // ] = commentsData;
 
   const {
     title,
@@ -57,7 +57,8 @@ export const Modal = () => {
     <div className={style.overlay} ref={overlayRef}>
       <div className={style.modal}>
         {
-          loading ? (<div className={style.preload}><AuthLoader /></div>) : (post === undefined) ?
+          loading ? (<div className={style.preload}><AuthLoader /></div>) :
+          (post.title === undefined) ?
           (<div className={style.preload}><p>DATA SOME ERROR</p></div>) :
           (<>
             <h2 className={style.title}>{title}</h2>
