@@ -31,7 +31,11 @@ export const Modal = () => {
   const handleClick = (event) => {
     const target = event.target;
     if (target === overlayRef.current) {
-      navigate(`/category/${page}`);
+      if (page === 'search') {
+        navigate(`/searched/${page}`);
+      } else {
+        navigate(`/category/${page}`);
+      }
     }
   };
 
@@ -43,11 +47,17 @@ export const Modal = () => {
   }, []);
 
   useEffect(() => {
-    document.addEventListener('keydown', event => {
+    document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
-        navigate(`/category/${page}`);
+        navigate(-1);
+        if (page === 'search') {
+          navigate(`/searched/${page}`);
+        } else {
+          navigate(`/category/${page}`);
+        }
       }
     });
+
     return () => {
       document.removeEventListener('keydown', navigate);
     };
@@ -81,9 +91,14 @@ export const Modal = () => {
             <button
               className={style.close}
               onClick={() => {
-                navigate(`/category/${page}`);
-              }}>
-              <CloseIcon/>
+                if (page === 'search') {
+                  navigate(`/searched/${page}`);
+                } else {
+                  navigate(`/category/${page}`);
+                }
+              }}
+            >
+              <CloseIcon />
             </button>
           </>)
         }
