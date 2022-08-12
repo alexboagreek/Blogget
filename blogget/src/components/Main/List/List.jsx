@@ -1,13 +1,13 @@
-import {usePosts} from '../../../hooks/usePosts';
+// import {usePosts} from '../../../hooks/usePosts';
 import style from './List.module.css';
 import Post from './Post';
 import {postsDataAsync} from '../../../store/postsData/postsDataAction';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useRef, useEffect} from 'react';
 import {Outlet, useParams} from 'react-router-dom';
 
 export const List = () => {
-  const posts = usePosts();
+  const posts = useSelector(state => state.postsReducer.data);
   const endList = useRef(null);
   const dispatch = useDispatch();
   const {page} = useParams();
